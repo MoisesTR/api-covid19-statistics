@@ -24,9 +24,12 @@
         "baseUrl": "./src",
         "rootDir": "./src",
         "paths": {
-            "config/*": ["config/*"],
-            "services/*": ["services/*"],
-            "models/*": ["models/*"]
+            "@config/*": ["config/*"],
+            "@services/*": ["services/*"],
+            "@models/*": ["models/*"],
+            "@utils/*": ["utils/*"],
+            "@environment/*": ["environment/*"],
+            "@common/*": ["common/*"],
         }
     },
     "exclude": ["node_modules"],
