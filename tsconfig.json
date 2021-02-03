@@ -30,6 +30,7 @@
             "@utils/*": ["utils/*"],
             "@environment/*": ["environment/*"],
             "@common/*": ["common/*"],
+            "@db/*": ["db/*"],
         }
     },
     "exclude": ["node_modules"],

@@ -1,14 +1,21 @@
 import { getExtensionModulesDI } from '@utils/utils';
-import { asClass, createContainer, Lifetime } from 'awilix';
+import { asClass, asValue, createContainer, Lifetime } from 'awilix';
 import { scopePerRequest } from 'awilix-express';
 import { Express } from 'express';
 import path from 'path';
+import mongooseModels from '@db/models/index';
 
 const container = createContainer({
     injectionMode: 'CLASSIC',
 });
 
 function loadContainer(app: Express): void {
+    mongooseModels.forEach((model) => {
+        container.register({
+            [model.name]: asValue(model.model),
+        });
+    });
+
     const extension = getExtensionModulesDI();
     container.loadModules(
         [
