@@ -28,7 +28,7 @@ process.on('unhandledRejection', (err) => {
             process.exit(1);
         });
     } else {
-        logger.info('HttpServer no instantiate');
+        logger.info('HttpServer no instantiated');
     }
 });
 
