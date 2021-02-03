@@ -35,6 +35,15 @@ export default class StatisticController {
         res.send(statistic);
     }
 
+    @before([validParams])
+    @route('/country-name/:countryName')
+    @GET()
+    public async findStatisticByCountryName(req: Request, res: Response): Promise<void> {
+        const { countryName } = req.params;
+        const statistic = await this.statisticService.findStatisticByCountryName(countryName);
+        res.send(statistic);
+    }
+
     @before([modelIdIsObjectId('statisticId'), addNewCasesValidator, validParams])
     @route('/new-cases/:statisticId')
     @POST()

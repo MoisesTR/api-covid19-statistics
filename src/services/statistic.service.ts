@@ -8,6 +8,9 @@ import AppError from '@utils/app-error';
 import { Types } from 'mongoose';
 
 export default class StatisticService {
+    private readonly MSG_STATISTIC_NOT_FOUND = `
+    The statistic of the requested country was not found`;
+
     constructor(private readonly statisticRepo: StatisticRepo) {}
 
     public syncData(data: any[]): Promise<StatisticDocument[]> {
@@ -33,7 +36,19 @@ export default class StatisticService {
         const statistic = await this.statisticRepo.findStatisticByIdCountry(idCountry);
 
         if (!statistic) {
-            throw new AppError('The statistic of the requested country was not found', 404);
+            throw new AppError(this.MSG_STATISTIC_NOT_FOUND, 404);
+        }
+
+        return statistic;
+    }
+
+    public async findStatisticByCountryName(
+        countryName: string,
+    ): Promise<StatisticDocument | null> {
+        const statistic = await this.statisticRepo.findStatisticByCountryName(countryName);
+
+        if (!statistic) {
+            throw new AppError(this.MSG_STATISTIC_NOT_FOUND, 404);
         }
 
         return statistic;

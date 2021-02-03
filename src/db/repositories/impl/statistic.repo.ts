@@ -2,7 +2,7 @@
 import { AddNewCaseDto, AddNewDeathDto, AddNewTestDto } from '@services/dtos/statistic';
 import { StatisticDocument, StatisticModel } from '@db/documents/statistic';
 import { Statistic } from '@common/interfaces/statistic';
-import { Types } from 'mongoose';
+import { FilterQuery, Types } from 'mongoose';
 import StatisticRepo from '../interfaces/statistic.repo';
 import { BaseRepo } from './base-repo.repo';
 
@@ -24,6 +24,14 @@ export default class StatisticRepoImpl
 
     findStatisticByIdCountry(idCountry: Types.ObjectId): Promise<StatisticDocument | null> {
         return this.findById(idCountry);
+    }
+
+    findStatisticByCountryName(countryName: string): Promise<StatisticDocument | null> {
+        const filter: FilterQuery<StatisticDocument> = {
+            [this.nameOf('country')]: countryName,
+        };
+
+        return this.findOneByFilter(filter);
     }
 
     async addNewCases(addNewCaseDto: AddNewCaseDto): Promise<StatisticDocument | null> {
