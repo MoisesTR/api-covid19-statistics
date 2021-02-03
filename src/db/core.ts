@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import EnvVar from '@environment/environment';
-import dbConfig from '@config/database';
+import dbConfig from '@db/database-config';
 import logger from '@utils/logger';
 
 export const connnectDb = async (): Promise<void> => {
