@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { Document, FilterQuery, Model, Types } from 'mongoose';
 import nameOfFactory from '@common/name-of-factory';
 
@@ -12,22 +11,21 @@ export abstract class BaseRepo<T extends Document> {
     }
 
     protected async findById(id: Types.ObjectId): Promise<T | null> {
-        return this.Model.findById(id);
+        const document = await this.Model.findById(id);
+        return document;
     }
 
     protected async findOneByFilter(filter: FilterQuery<T>): Promise<T | null> {
-        return this.Model.findOne(filter);
+        const document = await this.Model.findOne(filter);
+        return document;
     }
 
-    protected async findAll(): Promise<Array<T>> {
-        return this.Model.find();
+    protected async findAll(): Promise<T[]> {
+        const documents = await this.Model.find();
+        return documents;
     }
 
-    protected async findAllByFilter(filter: FilterQuery<T>): Promise<T[]> {
-        return this.Model.find(filter);
-    }
-
-    protected async create<E>(data: E): Promise<T> {
+    protected async create(data: Partial<T>): Promise<T> {
         const instance = new this.Model(data);
         return instance.save();
     }

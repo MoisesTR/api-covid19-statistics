@@ -21,7 +21,6 @@ httpServer.on('listening', onListening(httpServer));
 httpServer.on('close', () => logger.info('Closing'));
 
 export default class Server {
-    // eslint-disable-next-line class-methods-use-this
     constructor() {
         loadCorsConfiguration(app);
     }
