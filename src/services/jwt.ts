@@ -18,7 +18,7 @@ const createToken = (
 ): Token => {
     const payload = {
         ...customPayload,
-        exp: DateTime.utc().plus({ minutes: tokenDurationMinutes }).toMillis(),
+        exp: Math.floor(DateTime.utc().plus({ minutes: tokenDurationMinutes }).toSeconds()),
     };
 
     const _token = jwt.sign(payload, secret);
