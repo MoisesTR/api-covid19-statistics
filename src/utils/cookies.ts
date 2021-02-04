@@ -12,7 +12,7 @@ function setCookie(
     expiration: number,
 ): void {
     res.cookie(cookieType, token, {
-        expires: DateTime.fromMillis(expiration).toJSDate(),
+        expires: DateTime.fromSeconds(expiration).toJSDate(),
         httpOnly: true,
         secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
         sameSite: ENV.NODE_ENV === 'production' ? 'none' : 'lax',
