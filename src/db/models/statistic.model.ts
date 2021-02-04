@@ -4,6 +4,9 @@ import { model, Schema } from 'mongoose';
 
 const statisticSchema = new Schema<StatisticDocument>(
     {
+        continent: {
+            type: String,
+        },
         country: {
             type: String,
             unique: true,
